@@ -1,6 +1,5 @@
-package com.ad_coding.mvvmcourse.ui.screen.champion_list
+package com.ad_coding.mvvmcourse.ui.screen.champion_list.composable
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,21 +12,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.ad_coding.mvvmcourse.R
 import com.ad_coding.mvvmcourse.data.repository.ApiRepositoryImpl
 import com.ad_coding.mvvmcourse.domain.model.ChampionModel
-import com.ad_coding.mvvmcourse.ui.theme.MvvmCourseTheme
 
 @Composable
-fun ChampionCard(champion: ChampionModel) {
+fun ChampionCard(
+    champion: ChampionModel,
+    modifier: Modifier = Modifier
+    ) {
     Row(
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         AsyncImage(

@@ -112,35 +112,14 @@ data class Stats(
 @Serializable
 data class ChampionModel(
 
-	@SerialName("image")
-	val image: Image,
-
-	@SerialName("stats")
-	val stats: Stats,
-
-	@SerialName("partype")
-	val partype: String,
-
 	@SerialName("name")
 	val name: String,
-
-	@SerialName("id")
-	val id: String,
 
 	@SerialName("title")
 	val title: String,
 
 	@SerialName("blurb")
 	val blurb: String,
-
-	@SerialName("version")
-	val version: String,
-
-	@SerialName("key")
-	val key: String,
-
-	@SerialName("info")
-	val info: Info,
 
 	@SerialName("tags")
 	val tags: List<String>

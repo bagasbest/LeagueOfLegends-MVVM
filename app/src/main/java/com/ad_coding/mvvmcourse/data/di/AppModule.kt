@@ -1,10 +1,13 @@
 package com.ad_coding.mvvmcourse.data.di
 
+import android.content.Context
 import com.ad_coding.mvvmcourse.data.repository.ApiRepositoryImpl
 import com.ad_coding.mvvmcourse.domain.repository.ApiRepository
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
@@ -21,10 +24,22 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    // 1. Provide the ChuckerInterceptor
     @Provides
     @Singleton
-    fun provideHttpClient(): HttpClient =
-        HttpClient(OkHttp.create()) {
+    fun provideChuckerInterceptor(@ApplicationContext context: Context): ChuckerInterceptor =
+        ChuckerInterceptor.Builder(context).build()
+
+    // 2. Update HttpClient provider to use the interceptor
+    @Provides
+    @Singleton
+    fun provideHttpClient(chuckerInterceptor: ChuckerInterceptor): HttpClient =
+        HttpClient(OkHttp) { // Use the OkHttp engine factory
+            engine {
+                // Add the Chucker interceptor to the underlying OkHttp client
+                addInterceptor(chuckerInterceptor)
+            }
+
             defaultRequest {
                 url {
                     protocol = io.ktor.http.URLProtocol.HTTPS

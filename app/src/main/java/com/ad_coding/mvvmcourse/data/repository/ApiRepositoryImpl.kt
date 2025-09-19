@@ -1,5 +1,6 @@
 package com.ad_coding.mvvmcourse.data.repository
 
+import com.ad_coding.mvvmcourse.domain.model.ChampionDetailResponse
 import com.ad_coding.mvvmcourse.domain.model.ChampionResponseModel
 import com.ad_coding.mvvmcourse.domain.repository.ApiRepository
 import com.skydoves.sandwich.ApiResponse
@@ -23,7 +24,7 @@ class ApiRepositoryImpl(
     override suspend fun getAllChampion(): ApiResponse<ChampionResponseModel> =
         httpClient.getApiResponse("champion.json")
 
-    override suspend fun getChampionByName(name: String): ApiResponse<ChampionResponseModel> =
+    override suspend fun getChampionByName(name: String): ApiResponse<ChampionDetailResponse> =
         httpClient.getApiResponse("champion/$name.json")
 
 }
